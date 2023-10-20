@@ -186,13 +186,15 @@ Aşağıdakileri yapmak için profilListesi'ni kullanın:
 
 function profilListesi(arr) {
   const newArr = [...arr];
+  // const newArr = Array.from(arr);
   for (let i = 0; i < newArr.length; i++) {
     newArr[i] = newArr[i].profile;
+    // console.log(newArr[i]);
   }
   return newArr;
 }
-
-// Loglanan değer diğer for yöntemi ile aynı fakat for...of döngüsü dizi üzerinde güncelleme yapmıyor.
+// profilListesi(fenomenler);
+// Loglanan değer diğer for yöntemi ile aynı fakat for...of döngüsü dizi üzerinde güncelleme yapmıyor. (for...of kopyalanan bir array üzerinden döngü oluşturuyor (?))
 
 // ?
 // function profilListesi(arr) {
@@ -203,6 +205,8 @@ function profilListesi(arr) {
 //   }
 //   return copyOfArr;
 // }
+
+// profilListesi(fenomenler);
 
 /* Görev 5:
 Aşağıdakileri yapmak için fenomenSil'i kullanın:
@@ -254,7 +258,7 @@ Aşağıdakileri yapmak için enFenomenler'yi kullanın:
 function enFenomenler(arr) {
   const enFenomen = [];
   for (let item of arr) {
-    if (item.followers >= 100000000) {
+    if (item.followers > 100000000) {
       enFenomen.push(item.profile);
     }
   }
@@ -289,15 +293,31 @@ Not: Gönderi sayısı belli olmayan (NA) hesaba katmayın.
 Örnek: platformaGoreCokGonderiYapanFenomen(fenomenler, 'TikTok') çağrıldığında "charli damelio" dönmelidir
 */
 
-function platformaGoreCokGonderiYapanFenomen(arr, platform) {
-  const filteredByPlatform = arr.filter(function (item) {
-    return item.platform.includes(platform);
-  });
-  const sortedByPlatform = filteredByPlatform.sort(function (a, b) {
-    return b.posts - a.posts;
-  });
-  return sortedByPlatform[0].profile;
+function platformaGoreCokGonderiYapanFenomen(arr, platformadi) {
+  let result = "";
+  let maxPost = 0;
+  for (let i of arr) {
+    if (i.platform === platformadi) {
+      if (i.posts > maxPost) {
+        maxPost = i.posts;
+        result = i.profile;
+      }
+    }
+  }
+  return result;
 }
+
+// console.log(platformaGoreCokGonderiYapanFenomen(fenomenler, "Twitter"));
+
+// function platformaGoreCokGonderiYapanFenomen(arr, platform) {
+//   const filteredByPlatform = arr.filter(function (item) {
+//     return item.platform.includes(platform);
+//   });
+//   const sortedByPlatform = filteredByPlatform.sort(function (a, b) {
+//     return b.posts - a.posts;
+//   });
+//   return sortedByPlatform[0].profile;
+// }
 
 // console.log(platformaGoreCokGonderiYapanFenomen(fenomenler, "Twitter"));
 
